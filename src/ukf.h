@@ -43,58 +43,86 @@ class UKF {
 
 
   // initially set to false, set to true in first call of ProcessMeasurement
-  bool is_initialized_;
+  bool is_initialized;
+
+  // previous timestamp
+
+  double previous_timestamp;
 
   // if this is false, laser measurements will be ignored (except for init)
-  bool use_laser_;
+  bool use_laser;
 
   // if this is false, radar measurements will be ignored (except for init)
-  bool use_radar_;
+  bool use_radar;
 
   // state vector: [pos1 pos2 vel_abs yaw_angle yaw_rate] in SI units and rad
-  Eigen::VectorXd x_;
+  Eigen::VectorXd x;
+
+  // create augmented mean vector
+  Eigen::VectorXd x_aug;
 
   // state covariance matrix
-  Eigen::MatrixXd P_;
+  Eigen::MatrixXd P;
+
+  // create augmented state covariance
+  Eigen::MatrixXd P_aug;
+
+  // augmented square root matrix
+  Eigen::MatrixXd A;
+
+  // sigma points matrix
+  Eigen::MatrixXd Xsig;
 
   // predicted sigma points matrix
-  Eigen::MatrixXd Xsig_pred_;
+  Eigen::MatrixXd Xsig_pred;
+
+  // covariance matrix for prediction
+
+  Eigen::MatrixXd P_pred;
+
+  // vector for predicted states
+
+  Eigen::VectorXd x_pred;
+
+  // process covariance matrix
+
+  Eigen::MatrixXd Q;
 
   // time when the state is true, in us
-  long long time_us_;
+  long long time_us;
 
   // Process noise standard deviation longitudinal acceleration in m/s^2
-  double std_a_;
+  double std_a;
 
   // Process noise standard deviation yaw acceleration in rad/s^2
-  double std_yawdd_;
+  double std_yawdd;
 
   // Laser measurement noise standard deviation position1 in m
-  double std_laspx_;
+  double stdLaspx;
 
   // Laser measurement noise standard deviation position2 in m
-  double std_laspy_;
+  double stdLaspy;
 
   // Radar measurement noise standard deviation radius in m
-  double std_radr_;
+  double stdRadr;
 
   // Radar measurement noise standard deviation angle in rad
-  double std_radphi_;
+  double stdRadphi;
 
   // Radar measurement noise standard deviation radius change in m/s
-  double std_radrd_ ;
+  double stdRadrd;
 
   // Weights of sigma points
-  Eigen::VectorXd weights_;
+  Eigen::VectorXd weights;
 
   // State dimension
-  int n_x_;
+  int n_x;
 
   // Augmented state dimension
-  int n_aug_;
+  int n_aug;
 
   // Sigma point spreading parameter
-  double lambda_;
+  double lambda;
 };
 
 #endif  // UKF_H

@@ -16,6 +16,10 @@ class Tools {
    */
   virtual ~Tools();
 
+  // Convert polar to cartesian coordinates
+
+  void Tools::convertPolarToCart(double &px, double &py);
+
   /**
    * A helper method to calculate RMSE.
    */
